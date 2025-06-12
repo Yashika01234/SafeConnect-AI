@@ -1,0 +1,649 @@
+
+Save this as index.html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>AQUALYTIX • Safe Water Intelligence</title>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+html{
+scroll-behavior:smooth;
+}
+
+body{
+background:
+radial-gradient(circle at top left,#001233,#000814 40%),
+radial-gradient(circle at bottom right,#003566,#000814 60%);
+
+color:white;
+overflow-x:hidden;
+}
+
+.loader{
+position:fixed;
+inset:0;
+background:#000814;
+display:flex;
+justify-content:center;
+align-items:center;
+z-index:9999;
+transition:1s;
+}
+
+.loader h1{
+font-size:60px;
+background:linear-gradient(45deg,#00e5ff,#00ff88);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+animation:pulse 1.5s infinite;
+}
+
+@keyframes pulse{
+0%{transform:scale(1);}
+50%{transform:scale(1.08);}
+100%{transform:scale(1);}
+}
+
+.hero-subtitle{
+font-size:24px;
+margin-bottom:20px;
+color:#00e5ff;
+min-height:40px;
+}
+
+/* BACKGROUND GLOWS */
+
+.glow1,
+.glow2,
+.glow3{
+position:fixed;
+border-radius:50%;
+filter:blur(120px);
+z-index:-2;
+}
+
+.glow1{
+width:350px;
+height:350px;
+background:#00e5ff;
+top:-100px;
+left:-100px;
+opacity:0.25;
+}
+
+.glow2{
+width:300px;
+height:300px;
+background:#ff006e;
+bottom:-120px;
+right:-100px;
+opacity:0.18;
+}
+
+.glow3{
+width:250px;
+height:250px;
+background:#00ff88;
+top:40%;
+left:45%;
+opacity:0.15;
+}
+
+/* FLOATING PARTICLES */
+
+.particle{
+position:fixed;
+width:7px;
+height:7px;
+background:#00e5ff;
+border-radius:50%;
+z-index:-1;
+opacity:0.5;
+animation:floatParticle linear infinite;
+}
+
+@keyframes floatParticle{
+from{
+transform:translateY(100vh);
+opacity:0;
+}
+
+to{
+transform:translateY(-100vh);
+opacity:1;
+}
+}
+
+/* NAVBAR */
+
+nav{
+position:fixed;
+top:0;
+width:100%;
+padding:22px 60px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+background:rgba(255,255,255,0.06);
+backdrop-filter:blur(20px);
+border-bottom:1px solid rgba(255,255,255,0.1);
+z-index:1000;
+}
+
+.logo{
+text-shadow:0 0 18px rgba(0,229,255,0.6);
+font-size:36px;
+font-weight:800;
+background:linear-gradient(45deg,#00e5ff,#00ff88);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+}
+
+nav ul{
+display:flex;
+gap:35px;
+list-style:none;
+}
+
+nav ul li a{
+text-decoration:none;
+color:white;
+font-weight:500;
+transition:0.3s;
+}
+
+nav ul li a:hover{
+color:#00e5ff;
+}
+
+/* HERO */
+
+.hero{
+min-height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+text-align:center;
+padding:140px 40px 80px;
+position:relative;
+}
+
+.hero-content{
+max-width:1100px;
+}
+
+.hero h1{
+font-size:95px;
+line-height:110px;
+font-weight:800;
+margin-bottom:25px;
+animation:pop 1s ease;
+}
+
+.gradient{
+background:linear-gradient(45deg,#00e5ff,#00ff88,#00c6ff);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+}
+
+.hero p{
+font-size:22px;
+line-height:38px;
+opacity:0.85;
+max-width:900px;
+margin:auto;
+margin-bottom:40px;
+}
+
+.hero-btn{
+padding:20px 42px;
+border:none;
+border-radius:18px;
+font-size:18px;
+font-weight:600;
+background:linear-gradient(45deg,#00c6ff,#0072ff);
+color:white;
+cursor:pointer;
+transition:0.4s;
+box-shadow:0 0 25px rgba(0,198,255,0.5);
+}
+
+.hero-btn:hover{
+letter-spacing:1px;
+transform:translateY(-6px) scale(1.04);
+box-shadow:0 0 45px rgba(0,198,255,0.9);
+}
+
+@keyframes pop{
+0%{
+transform:scale(0.8);
+opacity:0;
+}
+100%{
+transform:scale(1);
+opacity:1;
+}
+}
+
+/* SECTION */
+
+.section{
+padding:90px 70px;
+}
+
+.section-title{
+font-size:60px;
+margin-bottom:50px;
+text-align:center;
+text-shadow:0 0 18px rgba(0,229,255,0.5);
+}
+
+/* CARDS */
+
+.cards{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+gap:30px;
+}
+
+.card{
+background:rgba(255,255,255,0.08);
+padding:38px;
+border-radius:32px;
+backdrop-filter:blur(22px);
+border:1px solid rgba(255,255,255,0.1);
+transition:0.5s;
+box-shadow:0 0 20px rgba(0,229,255,0.08);
+position:relative;
+overflow:hidden;
+}
+
+.card::before{
+content:'';
+position:absolute;
+width:220px;
+height:220px;
+background:rgba(255,255,255,0.05);
+border-radius:50%;
+top:-120px;
+right:-90px;
+}
+
+.card:hover{
+background:rgba(255,255,255,0.12);
+transform:translateY(-12px) scale(1.03);
+box-shadow:
+0 0 20px #00e5ff,
+0 0 40px rgba(0,229,255,0.4);
+}
+
+.card h2{
+font-size:28px;
+margin-bottom:22px;
+}
+
+.safe-value{
+text-shadow:0 0 15px rgba(0,229,255,0.4);
+font-size:55px;
+font-weight:800;
+margin-bottom:16px;
+background:linear-gradient(45deg,#00e5ff,#00ff88);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+}
+
+.card p{
+line-height:30px;
+opacity:0.85;
+font-size:17px;
+}
+
+/* INFO SECTION */
+
+.info-box{
+background:rgba(255,255,255,0.08);
+padding:50px;
+border-radius:35px;
+backdrop-filter:blur(22px);
+border:1px solid rgba(255,255,255,0.1);
+box-shadow:0 0 35px rgba(0,229,255,0.15);
+}
+
+.info-box h2{
+font-size:40px;
+margin-bottom:25px;
+}
+
+.info-box p{
+font-size:19px;
+line-height:38px;
+opacity:0.9;
+}
+
+/* FOOTER */
+
+footer{
+padding:40px;
+text-align:center;
+background:rgba(255,255,255,0.05);
+margin-top:50px;
+font-size:16px;
+}
+
+/* MOBILE */
+
+@media(max-width:950px){
+
+.hero h1{
+font-size:55px;
+line-height:70px;
+}
+
+.hero p{
+font-size:18px;
+line-height:32px;
+}
+
+.section-title{
+font-size:42px;
+}
+
+nav ul{
+display:none;
+}
+
+.section{
+padding:70px 25px;
+}
+
+nav{
+padding:20px 25px;
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="loader" id="loader">
+<h1>AQUALYTIX</h1>
+</div>
+
+<!-- GLOWS -->
+
+<div class="glow1"></div>
+<div class="glow2"></div>
+<div class="glow3"></div>
+
+<!-- PARTICLES -->
+
+<div class="particle" style="left:10%;animation-duration:12s;"></div>
+<div class="particle" style="left:20%;animation-duration:18s;"></div>
+<div class="particle" style="left:40%;animation-duration:15s;"></div>
+<div class="particle" style="left:60%;animation-duration:20s;"></div>
+<div class="particle" style="left:80%;animation-duration:14s;"></div>
+
+<!-- NAVBAR -->
+
+<nav>
+
+<div class="logo">
+AQUALYTIX
+</div>
+
+<ul>
+<li><a href="#home">Home</a></li>
+<li><a href="#safe">Safe Values</a></li>
+<li><a href="#about">About</a></li>
+</ul>
+
+</nav>
+
+<!-- HERO -->
+
+<section class="hero" id="home">
+
+<div class="hero-content">
+
+<div class="hero-subtitle" id="typingText"></div>
+
+<h1>
+Future of
+<span class="gradient">
+Safe Water
+</span>
+Intelligence
+</h1>
+
+<p>
+AQUALYTIX is a futuristic smart water awareness platform that helps people understand safe water quality parameters including safe pH value, safe TDS level, safe temperature, safe turbidity and healthy humidity conditions.
+</p>
+
+<button class="hero-btn" onclick="scrollToSection()">
+Explore Safe Values
+</button>
+
+</div>
+
+</section>
+
+<!-- SAFE VALUES -->
+
+<section class="section" id="safe">
+
+<h1 class="section-title">
+Safe Water Parameters
+</h1>
+
+<div class="cards">
+
+<div class="card">
+
+<h2><i class="fa-solid fa-flask"></i> Safe pH Value</h2>
+
+<div class="safe-value">
+6.5 - 8.5
+</div>
+
+<p style="margin-top:10px;color:#00ff88;font-weight:600;">
+Safe Range
+</p>
+
+<p>
+Water with pH between 6.5 and 8.5 is considered safe for drinking according to standard guidelines.
+</p>
+
+</div>
+
+<div class="card">
+
+<h2><i class="fa-solid fa-droplet"></i> Safe TDS Level</h2>
+
+<div class="safe-value">
+50 - 300 ppm
+</div>
+
+<p style="margin-top:10px;color:#00ff88;font-weight:600;">
+Ideal Drinking Range
+</p>
+
+<p>
+TDS below 300 ppm is considered excellent for drinking water quality and taste.
+</p>
+
+</div>
+
+<div class="card">
+
+<h2><i class="fa-solid fa-temperature-half"></i> Safe Temperature</h2>
+
+<div class="safe-value">
+20°C - 30°C
+</div>
+
+<p style="margin-top:10px;color:#00ff88;font-weight:600;">
+Normal Water Temperature
+</p>
+
+<p>
+Normal water temperature range for regular environmental conditions and monitoring.
+</p>
+
+</div>
+
+<div class="card">
+
+<h2><i class="fa-solid fa-water"></i> Safe Turbidity</h2>
+
+<div class="safe-value">
+0 - 5 NTU
+</div>
+
+<p style="margin-top:10px;color:#00ff88;font-weight:600;">
+Clear Water Range
+</p>
+
+<p>
+Low turbidity means cleaner and clearer water with fewer suspended particles.
+</p>
+
+</div>
+
+<div class="card">
+
+<h2><i class="fa-solid fa-cloud"></i> Safe Humidity</h2>
+
+<div class="safe-value">
+40% - 60%
+</div>
+
+<p style="margin-top:10px;color:#00ff88;font-weight:600;">
+Healthy Humidity Range
+</p>
+
+<p>
+Normal environmental humidity range for healthy indoor atmospheric conditions.
+</p>
+
+</div>
+
+<div class="card">
+
+<h2>Water Safety</h2>
+
+<div class="safe-value">
+Healthy
+</div>
+
+<p>
+Balanced water parameters help maintain safe, healthy and sustainable water usage.
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ABOUT -->
+
+<section class="section" id="about">
+
+<h1 class="section-title">
+About AQUALYTIX
+</h1>
+
+<div class="info-box">
+
+<h2>
+Smart Water Awareness Platform
+</h2>
+
+<p>
+AQUALYTIX is designed to spread awareness about safe water quality standards using futuristic UI design, smart visualization and modern web technologies. The platform demonstrates ideal ranges for important water parameters including pH value, TDS level, turbidity, temperature and humidity.
+
+</p>
+
+</div>
+
+</section>
+
+<!-- FOOTER -->
+
+<footer>
+
+<div style="margin-bottom:18px;display:flex;justify-content:center;gap:18px;font-size:24px;">
+<i class="fa-solid fa-droplet"></i>
+<i class="fa-solid fa-flask"></i>
+<i class="fa-solid fa-water"></i>
+</div>
+
+<div id="clock" style="margin-bottom:15px;font-size:18px;color:#00e5ff;"></div>
+
+AQUALYTIX • Smart Safe Water Intelligence Platform © 2026
+
+</footer>
+
+<script>
+
+window.addEventListener('load',()=>{
+setTimeout(()=>{
+document.getElementById('loader').style.opacity='0';
+document.getElementById('loader').style.pointerEvents='none';
+},1500);
+});
+
+const text='Advanced Smart Safe Water Platform';
+let index=0;
+
+function typeEffect(){
+if(index < text.length){
+document.getElementById('typingText').innerHTML += text.charAt(index);
+index++;
+setTimeout(typeEffect,60);
+}
+}
+
+typeEffect();
+
+function updateClock(){
+const now=new Date();
+document.getElementById('clock').innerHTML=
+now.toLocaleDateString()+' • '+now.toLocaleTimeString();
+}
+
+setInterval(updateClock,1000);
+updateClock();
+
+function scrollToSection(){
+
+document.getElementById('safe').scrollIntoView({
+behavior:'smooth'
+});
+
+}
+
+</script>
+
+</body>
+</html>
+
