@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>SafeConnect AI</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>🛡 SafeConnect AI</h1>
+
+    <h2>Intelligent Content Moderation Platform</h2>
+
+    <form method="POST">
+
+        <textarea
+            name="message"
+            rows="6"
+            placeholder="Enter a message to analyze..."
+            required></textarea>
+
+        <br>
+
+        <button type="submit">
+            Analyze Message
+        </button>
+
+    </form>
+
+    {% if prediction %}
+
+    <div class="result">
+
+        <h3>Category: {{ prediction }}</h3>
+
+        <h3>Risk Score: {{ risk }}</h3>
+
+        <h3>Confidence: {{ confidence }}%</h3>
+
+        <h3>Recommendation: {{ recommendation }}</h3>
+
+    </div>
+
+    {% endif %}
+
+</div>
+
+</body>
+</html>
